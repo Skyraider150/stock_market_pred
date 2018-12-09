@@ -1,35 +1,30 @@
 from testOnApple import *
 
-#test_stock_input
-#test_news
+test_count = 20
+test_len = test_stock_input.shape[0]/test_count
+test_starters = []
+for i in range(test_count):
+  test_starters.append(test_stock_input[int(i*test_len)])
 
-print(test_stock_input.shape, test_news.shape)
-print(test_stock_input[0])
-print(test_news[0])
+test_results = []
 
-pred_len = 21
+for j in range(test_count):
+  print('Test ', j)
+  current_test = int(test_len * j)
+  predictions = list(test_starters[j])
 
-price = test_stock_input[0]
-for i in range(pred_len):
-  news = np.reshape(test_news[i], (1, 600))
-  pred = model.predict([np.reshape(price[-7:], (1, 7, 1)), news])
-  price = np.concatenate((price, pred))
+  for i in range(int(test_len)):
+    stock_in = np.reshape(predictions[-7:], (1, 7, 1))
+    news_in = np.reshape(test_news[current_test], (1, 600))
+    prediction = model.predict([stock_in, news_in])
+    predictions.append(prediction)
+    current_test += 1
 
-plt.plot(np.concatenate((test_stock_input[0], test_stock_input[7], test_stock_input[14])))
-plt.plot(price)
+  test_results.append(predictions)
+
+  plt.figure(figsize=(22, 10))
+plt.plot(test_stock_output)
+for j in range(test_count):
+  plt.plot(list(range(int(test_len * j), int(test_len * j)+int(test_len))), test_results[j][:-7])
 plt.show()
-
-for i in range(int((test_stock_input.shape[0]-7)/test_stock_input.shape[1])):
-  model.predict([np.reshape(test_stock_input[i*7], (1, 7, 1)), np.reshape(test_news[i*7], (1, 600))])
-
-from keras.utils.vis_utils import plot_model
-from keras import backend as K
-import matplotlib.pyplot as plt
-import numpy as np
-from scipy.stats import norm
-
-plot_model(model, show_shapes=True, show_layer_names=True)
-
-from IPython.display import Image, display
-display(Image('model.png'))
 
