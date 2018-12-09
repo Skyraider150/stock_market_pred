@@ -2,7 +2,7 @@
 
 This is the homework project for the course "Deep Learning a gyakorlatban Python és Lua alapokon" for the team ^
 
-The project's documentation can be found in the Documentation.pdf file.
+The project's documentation can be found in the Documentation.pdf file. An ieee template-based documentation is also available as IEEE_Documentation.pdf.
 
 The directory stockExchangePrediction contains the project in a modular format, and the Stock market pred 1.0.ipynb is the first milestone, the Stock Market pred 2.0.ipynb is the second, and the Stock market 3.0.ipynb is the final version of the project as a Jupyter Notebook. You can use that or the project istelf, whose files are the following:
 
